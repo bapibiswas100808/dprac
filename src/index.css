@@ -12,6 +12,20 @@ code {
     monospace;
 }
 
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans&family=Poppins&family=Roboto&display=swap");
+
+.open-sans {
+  font-family: "Open Sans", sans-serif !important;
+}
+
+.poppins {
+  font-family: "Poppins", sans-serif !important;
+}
+
+.roboto {
+  font-family: "Roboto", sans-serif !important;
+}
+
 .container {
   padding: 0px 100px;
 }
