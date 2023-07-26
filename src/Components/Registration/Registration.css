@@ -1,3 +1,6 @@
 .registration-area {
   min-height: calc(100vh - 102px);
 }
+.ui.form select {
+  background-color: #5f99be !important;
+}

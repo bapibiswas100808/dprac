@@ -3,36 +3,83 @@ import { Button, Form } from "semantic-ui-react";
 import "./Registration.css";
 import FormInput from "../../Components/FormInput/FormInput";
 import FormDropdown from "../../Components/FormDropdown/FormDropdown";
-
 const Registration = () => {
-  const [input, setInput] = useState("");
-  const [gender, setGender] = useState("");
-  const handleInput = (e) => {
-    const getInput = e.target.value;
-    setInput(getInput);
+  const [firstInput, setFirstInput] = useState("");
+  const [lastInput, setLastInput] = useState("");
+  const [dobInput, setDobInput] = useState("");
+  const [emailInput, setEmailInput] = useState("");
+  const [telInput, setTelInput] = useState("");
+  const [pswInput, setPswInput] = useState("");
+  const [cpswInput, setCpswInput] = useState("");
+  const [gender, setGender] = useState("2");
+  const handleFirstInput = (e) => {
+    const getFirstInput = e.target.value;
+    setFirstInput(getFirstInput);
   };
-  const handleChange = (selectedGender) => {
-    setGender(selectedGender);
+  const handleLastInput = (e) => {
+    const getLastInput = e.target.value;
+    setLastInput(getLastInput);
   };
+  const handleDobInput = (e) => {
+    const getDobInput = e.target.value;
+    setDobInput(getDobInput);
+  };
+  const handleEmailInput = (e) => {
+    const getEmailInput = e.target.value;
+    setEmailInput(getEmailInput);
+  };
+  const handleTelInput = (e) => {
+    const getTelInput = e.target.value;
+    setTelInput(getTelInput);
+  };
+  const handlePswInput = (e) => {
+    const getPswInput = e.target.value;
+    setPswInput(getPswInput);
+  };
+  const handleCpswInput = (e) => {
+    const getCpswInput = e.target.value;
+    setCpswInput(getCpswInput);
+  };
+  // const handleChange = (selectedGender) => {
+  //   setGender(selectedGender);
+  // };
+  const genderOptions = [
+    {
+      id: 0,
+      name: "Male",
+    },
+    {
+      id: 1,
+      name: "Female",
+    },
+    {
+      id: 2,
+      name: "Other",
+    },
+  ];
+  const handleGenderChange = (e) => {
+    const genderId = e.target.value;
+    setGender(genderId);
+  };
+  console.log(gender);
   const handleFormSubmit = () => {
-    console.log("First Name:", input);
-    console.log("Last Name:", input);
-    console.log("Date of Birth:", input);
-    console.log("Email Address:", input);
-    console.log("Mobile Number:", input);
-    console.log("Password:", input);
-    console.log("Confirm Password:", input);
+    console.log("First Name:", firstInput);
+    console.log("Last Name:", lastInput);
+    console.log("Date of Birth:", dobInput);
+    console.log("Email Address:", emailInput);
+    console.log("Mobile Number:", telInput);
+    console.log("Password:", pswInput);
+    console.log("Confirm Password:", cpswInput);
     console.log("Selected Gender:", gender);
   };
-
   return (
     <section className="registration-area">
       <div className="container pt-4">
         <Form>
           <Form.Field>
             <FormInput
-              input={input}
-              handleInput={handleInput}
+              firstInputt={firstInput}
+              handleInput={handleFirstInput}
               type="text"
               placeholder={"First Name"}
               label={"First Name"}
@@ -40,8 +87,8 @@ const Registration = () => {
           </Form.Field>
           <Form.Field>
             <FormInput
-              input={input}
-              handleInput={handleInput}
+              lastInput={lastInput}
+              handleInput={handleLastInput}
               type="text"
               placeholder={"Last Name"}
               label={"Last Name"}
@@ -49,16 +96,16 @@ const Registration = () => {
           </Form.Field>
           <Form.Field>
             <FormInput
-              input={input}
-              handleInput={handleInput}
+              dobInput={dobInput}
+              handleInput={handleDobInput}
               type="date"
               label={"Date of Birth"}
             />
           </Form.Field>
           <Form.Field>
             <FormInput
-              input={input}
-              handleInput={handleInput}
+              emailInput={emailInput}
+              handleInput={handleEmailInput}
               type="email"
               placeholder={"Email adress"}
               label={"Email Address"}
@@ -66,8 +113,8 @@ const Registration = () => {
           </Form.Field>
           <Form.Field>
             <FormInput
-              input={input}
-              handleInput={handleInput}
+              telInput={telInput}
+              handleInput={handleTelInput}
               type="tel"
               placeholder={"Mobile Number"}
               label={"Mobile Number"}
@@ -75,8 +122,8 @@ const Registration = () => {
           </Form.Field>
           <Form.Field>
             <FormInput
-              input={input}
-              handleInput={handleInput}
+              pswInput={pswInput}
+              handleInput={handlePswInput}
               type="password"
               placeholder={"write password"}
               label={"Password"}
@@ -84,21 +131,26 @@ const Registration = () => {
           </Form.Field>
           <Form.Field>
             <FormInput
-              input={input}
-              handleInput={handleInput}
+              cpswInput={cpswInput}
+              handleInput={handleCpswInput}
               type="password"
               placeholder={"Write password again"}
               label={"Confirm password"}
             />
           </Form.Field>
           <Form.Field>
-            <FormDropdown
+            {/* <FormDropdown
               gender={gender}
               label={"Select Gender"}
               handleChange={handleChange}
+            /> */}
+            <FormDropdown
+              label="Gender"
+              options={genderOptions}
+              value={gender}
+              onChange={handleGenderChange}
             />
           </Form.Field>
-
           <Button onClick={() => handleFormSubmit()} className="btn">
             Register Here
           </Button>
@@ -107,5 +159,4 @@ const Registration = () => {
     </section>
   );
 };
-
 export default Registration;
