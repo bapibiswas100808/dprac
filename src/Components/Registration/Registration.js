@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Form } from "semantic-ui-react";
 import "./Registration.css";
 import FormInput from "../../Components/FormInput/FormInput";
 import FormDropdown from "../../Components/FormDropdown/FormDropdown";
+import axios from "axios";
 const Registration = () => {
   const [firstInput, setFirstInput] = useState("");
   const [lastInput, setLastInput] = useState("");
@@ -12,6 +13,8 @@ const Registration = () => {
   const [pswInput, setPswInput] = useState("");
   const [cpswInput, setCpswInput] = useState("");
   const [gender, setGender] = useState("2");
+  // const [country, setCountry] = useState("");
+
   const handleFirstInput = (e) => {
     const getFirstInput = e.target.value;
     setFirstInput(getFirstInput);
@@ -61,7 +64,22 @@ const Registration = () => {
     const genderId = e.target.value;
     setGender(genderId);
   };
-  console.log(gender);
+
+  const [countries, setCountries] = useState([]);
+  //getting country data from API and storing it to countries state
+  useEffect(() => {
+    axios //use only axios here
+      .get("https://auth.privateyebd.com/api/v1/country/") //use full api url here
+      .then((res) => setCountries(res.data.results))
+      .catch((err) => {
+        alert(JSON.stringify(err));
+      });
+  }, []);
+  console.log(countries);
+  const handleCountryChange = (e) => {
+    const countryId = e.target.value;
+    setCountries(countryId);
+  };
   const handleFormSubmit = () => {
     console.log("First Name:", firstInput);
     console.log("Last Name:", lastInput);
@@ -136,6 +154,14 @@ const Registration = () => {
               type="password"
               placeholder={"Write password again"}
               label={"Confirm password"}
+            />
+          </Form.Field>
+          <Form.Field>
+            <FormDropdown
+              label="Country"
+              options={countries}
+              value={countries}
+              onChange={handleCountryChange}
             />
           </Form.Field>
           <Form.Field>
