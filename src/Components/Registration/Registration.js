@@ -13,8 +13,7 @@ const Registration = () => {
   const [pswInput, setPswInput] = useState("");
   const [cpswInput, setCpswInput] = useState("");
   const [gender, setGender] = useState("2");
-  // const [country, setCountry] = useState("");
-
+  const [country, setCountry] = useState("20");
   const handleFirstInput = (e) => {
     const getFirstInput = e.target.value;
     setFirstInput(getFirstInput);
@@ -64,7 +63,6 @@ const Registration = () => {
     const genderId = e.target.value;
     setGender(genderId);
   };
-
   const [countries, setCountries] = useState([]);
   //getting country data from API and storing it to countries state
   useEffect(() => {
@@ -75,11 +73,12 @@ const Registration = () => {
         alert(JSON.stringify(err));
       });
   }, []);
-  console.log(countries);
+
   const handleCountryChange = (e) => {
-    const countryId = e.target.value;
-    setCountries(countryId);
+    const selectedCountryId = e.target.value;
+    setCountry(selectedCountryId);
   };
+
   const handleFormSubmit = () => {
     console.log("First Name:", firstInput);
     console.log("Last Name:", lastInput);
@@ -160,7 +159,7 @@ const Registration = () => {
             <FormDropdown
               label="Country"
               options={countries}
-              value={countries}
+              value={country}
               onChange={handleCountryChange}
             />
           </Form.Field>

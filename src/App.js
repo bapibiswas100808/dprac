@@ -28,8 +28,14 @@ function App() {
           <Route path="/login" element={<Login />} />
         </Routes>
         <section className="switch">
-          <label>{theme === "light" ? "Light Mode" : "Dark Mode"}</label>
-          <ReactSwitch onChange={toggleTheme} checked={theme === "dark"} />
+          <label className="switch-label">
+            {theme === "light" ? "Light Mode" : "Dark Mode"}
+          </label>
+          <ReactSwitch
+            className="ps-3"
+            onChange={toggleTheme}
+            checked={theme === "dark"}
+          />
         </section>
         <Footer />
       </div>
