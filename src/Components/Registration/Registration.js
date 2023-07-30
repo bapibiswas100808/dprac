@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Button, Form } from "semantic-ui-react";
 import "./Registration.css";
-import FormInput from "../../Components/FormInput/FormInput";
+import FormInput from "../FormElement/FormInput";
 import FormDropdown from "../../Components/FormDropdown/FormDropdown";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+
 const Registration = () => {
   const [firstInput, setFirstInput] = useState("");
   const [lastInput, setLastInput] = useState("");
@@ -14,6 +16,11 @@ const Registration = () => {
   const [cpswInput, setCpswInput] = useState("");
   const [gender, setGender] = useState("2");
   const [country, setCountry] = useState("20");
+  const [registrationSuccess, setRegistrationSuccess] = useState(
+    "Click Register Here to Sumbit Form"
+  );
+
+  const navigate = useNavigate();
   const handleFirstInput = (e) => {
     const getFirstInput = e.target.value;
     setFirstInput(getFirstInput);
@@ -64,10 +71,10 @@ const Registration = () => {
     setGender(genderId);
   };
   const [countries, setCountries] = useState([]);
-  //getting country data from API and storing it to countries state
+
   useEffect(() => {
-    axios //use only axios here
-      .get("https://auth.privateyebd.com/api/v1/country/") //use full api url here
+    axios
+      .get("https://auth.privateyebd.com/api/v1/country/")
       .then((res) => setCountries(res.data.results))
       .catch((err) => {
         alert(JSON.stringify(err));
@@ -80,19 +87,35 @@ const Registration = () => {
   };
 
   const handleFormSubmit = () => {
-    console.log("First Name:", firstInput);
-    console.log("Last Name:", lastInput);
-    console.log("Date of Birth:", dobInput);
-    console.log("Email Address:", emailInput);
-    console.log("Mobile Number:", telInput);
-    console.log("Password:", pswInput);
-    console.log("Confirm Password:", cpswInput);
-    console.log("Selected Gender:", gender);
+    const registerApiUrl = "https://auth.privateyebd.com/api/v1/signup/";
+    const formData = {
+      first_name: firstInput,
+      last_name: lastInput,
+      dob: dobInput,
+      email: emailInput,
+      mobile: telInput,
+      password: pswInput,
+      confirm_password: cpswInput,
+      country: country,
+      gender: gender,
+    };
+
+    axios
+      .post(registerApiUrl, formData)
+      .then((response) => {
+        console.log(response.data.email);
+        setRegistrationSuccess("Registration Succesful!");
+        localStorage.setItem("email", response.data.email);
+        navigate(`/verification`);
+      })
+      .catch((error) => {
+        console.error("Error:", error.response.data);
+      });
   };
   return (
     <section className="registration-area">
       <div className="container pt-4">
-        <Form>
+        <Form onSubmit={() => handleFormSubmit()}>
           <Form.Field>
             <FormInput
               firstInputt={firstInput}
@@ -176,7 +199,8 @@ const Registration = () => {
               onChange={handleGenderChange}
             />
           </Form.Field>
-          <Button onClick={() => handleFormSubmit()} className="btn">
+          <p>{registrationSuccess}</p>
+          <Button type="submit" className="btn">
             Register Here
           </Button>
         </Form>

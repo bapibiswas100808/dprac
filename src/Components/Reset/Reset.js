@@ -1,0 +1,58 @@
+import React from "react";
+import { Button, Form } from "semantic-ui-react";
+import FormInput from "../FormElement/FormInput";
+import { useState } from "react";
+import axios from "axios";
+
+const Reset = () => {
+  const [resetInput, setResetInput] = useState("");
+  const [newPswInput, setNewPswInput] = useState("");
+  const resetEmail = localStorage.getItem("femail");
+  const handleReset = () => {
+    const resetApi =
+      "https://auth.privateyebd.com/api/v1/forget/password/confirm/";
+    const resetForm = {
+      email: resetEmail,
+      code: resetInput,
+      password: newPswInput,
+    };
+    axios
+      .post(resetApi, resetForm)
+      .then((response) => {
+        console.log("reset password:", response.data);
+        localStorage.removeItem("femail");
+      })
+      .catch((error) => {
+        console.error("Error:", error.response);
+      });
+  };
+  return (
+    <section>
+      <div className="container">
+        <Form>
+          <Form.Field>
+            <FormInput
+              value={resetInput}
+              placeholder="Write Your verification code Here"
+              type="code"
+              handleInput={(e) => setResetInput(e.target.value)}
+            />
+          </Form.Field>
+          <Form.Field>
+            <FormInput
+              value={newPswInput}
+              placeholder="Write Your new password Here"
+              type="code"
+              handleInput={(e) => setNewPswInput(e.target.value)}
+            />
+          </Form.Field>
+          <Button onClick={() => handleReset()} type="submit">
+            Set New Password
+          </Button>
+        </Form>
+      </div>
+    </section>
+  );
+};
+
+export default Reset;

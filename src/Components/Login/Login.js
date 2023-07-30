@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { Button, Form } from "semantic-ui-react";
 import "./Login.css";
-import FormInput from "../../Components/FormInput/FormInput";
+import FormInput from "../FormElement/FormInput";
+import axios from "axios";
+import { NavLink } from "react-router-dom";
 
 const Login = () => {
   const [input, setInput] = useState("");
@@ -15,8 +17,19 @@ const Login = () => {
     setLgPswInput(getLgPswInput);
   };
   const handleLogin = () => {
-    console.log(input);
-    console.log(lgPswInput);
+    const loginApiUrl = "https://auth.privateyebd.com/api/v1/login/";
+    const loginFormData = {
+      email: input,
+      password: lgPswInput,
+    };
+    axios
+      .post(loginApiUrl, loginFormData)
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.error("Error:", error.response.data);
+      });
   };
   return (
     <section className="login-area">
@@ -45,6 +58,7 @@ const Login = () => {
             Login Here
           </Button>
         </Form>
+        <NavLink to="/forget">Forget Password?</NavLink>
       </div>
     </section>
   );

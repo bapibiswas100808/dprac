@@ -8,6 +8,9 @@ import Login from "./Components/Login/Login";
 import { Route, Routes } from "react-router-dom";
 import { createContext, useState } from "react";
 import ReactSwitch from "react-switch";
+import Verification from "./Components/Verification/Verification";
+import Forget from "./Components/Forget/Forget";
+import Reset from "./Components/Reset/Reset";
 export const ThemeContext = createContext(null);
 
 function App() {
@@ -26,6 +29,10 @@ function App() {
           <Route path="/registration" element={<Registration />} />
           <Route path="/home" element={<Home></Home>} />
           <Route path="/login" element={<Login />} />
+          <Route path="/verification" element={<Verification />} />
+          <Route path="/forget" element={<Forget />} />
+          <Route path="/reset" element={<Reset />} />
+          {/* <Route path="/verification/:email" component={Verification} /> */}
         </Routes>
         <section className="switch">
           <label className="switch-label">
