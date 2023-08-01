@@ -1,0 +1,7 @@
+.reset-area {
+  height: calc(100vh - 158px);
+}
+.reset-area button:hover {
+  background-color: brown !important;
+  color: #ffffff !important;
+}

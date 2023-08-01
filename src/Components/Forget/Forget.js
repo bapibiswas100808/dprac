@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import FormInput from "../FormElement/FormInput";
-import { Button, Form } from "semantic-ui-react";
+import { Form } from "semantic-ui-react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import "./Forget.css";
 
 const Forget = () => {
   const [forgetInput, setForgetInput] = useState("");
@@ -25,9 +26,9 @@ const Forget = () => {
   };
 
   return (
-    <section>
+    <section className="forget-area">
       <div className="container">
-        <Form>
+        <Form className="pt-4">
           <Form.Field>
             <FormInput
               value={forgetInput}
@@ -36,9 +37,13 @@ const Forget = () => {
               handleInput={(e) => setForgetInput(e.target.value)}
             />
           </Form.Field>
-          <Button onClick={() => handleForgetSubmit()} type="submit">
+          <button
+            onClick={() => handleForgetSubmit()}
+            type="submit"
+            className="btn"
+          >
             Forget Password
-          </Button>
+          </button>
         </Form>
       </div>
     </section>

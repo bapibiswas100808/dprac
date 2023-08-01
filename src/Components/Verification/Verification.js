@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { Button, Form } from "semantic-ui-react";
+import { Form } from "semantic-ui-react";
 import axios from "axios";
+import "./Verification.css";
 
 const Verification = () => {
   const [verificationCode, setVerificationCode] = useState("");
@@ -18,7 +19,7 @@ const Verification = () => {
     axios
       .post(verificationApiUrl, verificationData)
       .then((response) => {
-        console.log("Verification success:", response);
+        alert("Verification Successful. Please Login.");
         localStorage.removeItem("email");
       })
       .catch((error) => {
@@ -39,9 +40,9 @@ const Verification = () => {
               placeholder="Enter verification code"
             />
           </Form.Field>
-          <Button onClick={handleVerificationCode} className="btn">
+          <button onClick={handleVerificationCode} className="btn">
             Submit
-          </Button>
+          </button>
         </Form>
       </div>
     </section>

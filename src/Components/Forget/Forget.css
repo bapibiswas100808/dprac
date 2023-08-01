@@ -1,0 +1,6 @@
+.forget-area {
+  min-height: calc(100vh - 158px);
+}
+.forget-area button:hover {
+  background-color: brown !important;
+}

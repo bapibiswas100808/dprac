@@ -1,8 +1,9 @@
 import React from "react";
-import { Button, Form } from "semantic-ui-react";
+import { Form } from "semantic-ui-react";
 import FormInput from "../FormElement/FormInput";
 import { useState } from "react";
 import axios from "axios";
+import "./Reset.css";
 
 const Reset = () => {
   const [resetInput, setResetInput] = useState("");
@@ -20,6 +21,7 @@ const Reset = () => {
       .post(resetApi, resetForm)
       .then((response) => {
         console.log("reset password:", response.data);
+        alert("Password Changed Successfully");
         localStorage.removeItem("femail");
       })
       .catch((error) => {
@@ -27,14 +29,14 @@ const Reset = () => {
       });
   };
   return (
-    <section>
+    <section className="reset-area">
       <div className="container">
         <Form>
           <Form.Field>
             <FormInput
               value={resetInput}
               placeholder="Write Your verification code Here"
-              type="code"
+              type="text"
               handleInput={(e) => setResetInput(e.target.value)}
             />
           </Form.Field>
@@ -42,13 +44,13 @@ const Reset = () => {
             <FormInput
               value={newPswInput}
               placeholder="Write Your new password Here"
-              type="code"
+              type="password"
               handleInput={(e) => setNewPswInput(e.target.value)}
             />
           </Form.Field>
-          <Button onClick={() => handleReset()} type="submit">
+          <button onClick={() => handleReset()} type="submit" className="btn">
             Set New Password
-          </Button>
+          </button>
         </Form>
       </div>
     </section>

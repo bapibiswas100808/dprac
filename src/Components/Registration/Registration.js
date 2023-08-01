@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button, Form } from "semantic-ui-react";
+import { Form } from "semantic-ui-react";
 import "./Registration.css";
 import FormInput from "../FormElement/FormInput";
 import FormDropdown from "../../Components/FormDropdown/FormDropdown";
@@ -16,9 +16,6 @@ const Registration = () => {
   const [cpswInput, setCpswInput] = useState("");
   const [gender, setGender] = useState("2");
   const [country, setCountry] = useState("20");
-  const [registrationSuccess, setRegistrationSuccess] = useState(
-    "Click Register Here to Sumbit Form"
-  );
 
   const navigate = useNavigate();
   const handleFirstInput = (e) => {
@@ -49,9 +46,7 @@ const Registration = () => {
     const getCpswInput = e.target.value;
     setCpswInput(getCpswInput);
   };
-  // const handleChange = (selectedGender) => {
-  //   setGender(selectedGender);
-  // };
+
   const genderOptions = [
     {
       id: 0,
@@ -103,8 +98,6 @@ const Registration = () => {
     axios
       .post(registerApiUrl, formData)
       .then((response) => {
-        console.log(response.data.email);
-        setRegistrationSuccess("Registration Succesful!");
         localStorage.setItem("email", response.data.email);
         navigate(`/verification`);
       })
@@ -115,7 +108,7 @@ const Registration = () => {
   return (
     <section className="registration-area">
       <div className="container pt-4">
-        <Form onSubmit={() => handleFormSubmit()}>
+        <Form className="pb-4" onSubmit={() => handleFormSubmit()}>
           <Form.Field>
             <FormInput
               firstInputt={firstInput}
@@ -187,11 +180,6 @@ const Registration = () => {
             />
           </Form.Field>
           <Form.Field>
-            {/* <FormDropdown
-              gender={gender}
-              label={"Select Gender"}
-              handleChange={handleChange}
-            /> */}
             <FormDropdown
               label="Gender"
               options={genderOptions}
@@ -199,10 +187,12 @@ const Registration = () => {
               onChange={handleGenderChange}
             />
           </Form.Field>
-          <p>{registrationSuccess}</p>
-          <Button type="submit" className="btn">
-            Register Here
-          </Button>
+          <p>Click "Register Here" to Submit</p>
+          <div>
+            <button type="submit" className="btn">
+              Register Here
+            </button>
+          </div>
         </Form>
       </div>
     </section>

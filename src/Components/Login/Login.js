@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { Button, Form } from "semantic-ui-react";
+import { Form } from "semantic-ui-react";
 import "./Login.css";
 import FormInput from "../FormElement/FormInput";
 import axios from "axios";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const navigate = useNavigate();
   const [input, setInput] = useState("");
   const [lgPswInput, setLgPswInput] = useState("");
   const handleInput = (e) => {
@@ -25,7 +26,8 @@ const Login = () => {
     axios
       .post(loginApiUrl, loginFormData)
       .then((response) => {
-        console.log(response.data);
+        localStorage.setItem("getToken", response.data.token);
+        navigate("/home");
       })
       .catch((error) => {
         console.error("Error:", error.response.data);
@@ -34,7 +36,7 @@ const Login = () => {
   return (
     <section className="login-area">
       <div className="container pt-4">
-        <Form>
+        <Form className="pb-3">
           <Form.Field>
             <FormInput
               input={input}
@@ -54,9 +56,11 @@ const Login = () => {
             />
           </Form.Field>
 
-          <Button onClick={() => handleLogin()} className="btn">
-            Login Here
-          </Button>
+          <div>
+            <button onClick={() => handleLogin()} className="btn">
+              Login Here
+            </button>
+          </div>
         </Form>
         <NavLink to="/forget">Forget Password?</NavLink>
       </div>

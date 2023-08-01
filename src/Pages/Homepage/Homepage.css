@@ -1,15 +1,3 @@
-.home-area {
-  /* background-color: blueviolet; */
-  min-height: calc(100vh - 202px);
-  padding-top: 50px;
-}
-/* .drop-area {
-    height: 450px;
-  }
-  .text-area {
-    height: 450px;
-  } */
-
 @media (max-width: 991px) {
   .drop-area {
     height: 150px;

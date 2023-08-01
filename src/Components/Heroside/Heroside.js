@@ -1,6 +1,6 @@
 import React from "react";
 import Dropdown from "react-bootstrap/Dropdown";
-import { Form, TextArea } from "semantic-ui-react";
+import { Form } from "semantic-ui-react";
 
 const Heroside = ({ fontSize, fontType, handleSize, handleFonts }) => {
   return (
@@ -33,12 +33,14 @@ const Heroside = ({ fontSize, fontType, handleSize, handleFonts }) => {
       </div>
       <div className="font-drop">
         <Form>
-          <TextArea
-            value={fontSize}
-            onChange={(e) => handleSize(e)}
-            rows={1}
-            placeholder="Font Size"
-          />
+          <div>
+            <textarea
+              value={fontSize}
+              onChange={(e) => handleSize(e)}
+              rows={1}
+              placeholder="Font Size"
+            />
+          </div>
         </Form>
       </div>
     </div>

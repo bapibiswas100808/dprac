@@ -1,24 +1,21 @@
-import React, { useEffect, useState } from "react";
-import Button from "react-bootstrap/Button";
+// import React, { useEffect, useState } from "react";
+// import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
-import Form from "react-bootstrap/Form";
+// import Form from "react-bootstrap/Form";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import "./Header.css";
 import { NavLink } from "react-router-dom";
+import ReactSwitch from "react-switch";
+import { useContext } from "react";
+import { ThemeContext } from "../ThemeContext/ThemeContext";
 
 const Header = () => {
-  const ToogleTheme = () => {
-    if (theme === "dark-theme") {
-      setTheme("light-theme");
-    } else {
-      setTheme("dark-theme");
-    }
+  const { theme, setTheme } = useContext(ThemeContext);
+  const toggleTheme = () => {
+    setTheme((currentTheme) => (currentTheme === "light" ? "dark" : "light"));
   };
-  const [theme, setTheme] = useState("light-theme");
-  useEffect(() => {
-    document.body.className = theme;
-  }, [theme]);
+
   return (
     <section className="header-area">
       <Navbar expand="lg">
@@ -45,9 +42,19 @@ const Header = () => {
                 Login
               </NavLink>
             </Nav>
-            <Form className="d-flex">
+            {/* <Form className="d-flex">
               <Button onClick={() => ToogleTheme()}>Toggle</Button>
-            </Form>
+            </Form> */}
+            <section className="switch">
+              <label className="switch-label">
+                {theme === "light" ? "Light Mode" : "Dark Mode"}
+              </label>
+              <ReactSwitch
+                className="ps-3"
+                onChange={toggleTheme}
+                checked={theme === "dark"}
+              />
+            </section>
           </Navbar.Collapse>
         </Container>
       </Navbar>

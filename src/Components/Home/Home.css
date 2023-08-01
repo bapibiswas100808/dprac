@@ -1,3 +1,11 @@
+.home-area {
+  height: calc(100vh - 158px);
+}
 .drop-area {
   padding-top: 50px;
+  min-height: 200px;
+}
+
+.home-area button:hover {
+  color: #ffffff;
 }

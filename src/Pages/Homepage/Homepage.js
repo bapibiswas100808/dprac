@@ -3,7 +3,7 @@ import "./Homepage.css";
 
 const Homepage = ({ fontSize, fontType }) => {
   return (
-    <section className="home-area">
+    <section>
       <div className="container">
         <div className="text">
           <h1 style={{ fontFamily: `${fontType}`, fontSize: `${fontSize}px` }}>
