@@ -30,7 +30,7 @@ const Login = () => {
         navigate("/home");
       })
       .catch((error) => {
-        console.error("Error:", error.response.data);
+        alert("Email Adress does not exists");
       });
   };
   return (
@@ -53,6 +53,8 @@ const Login = () => {
               type="password"
               placeholder={"write password"}
               label={"Password"}
+              pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@#$%^&+=!])[A-Za-z\d@#$%^&+=!]{8,30}$"
+              errorMessage="Password should be at least 8 character having one letter, one number and one special character!"
             />
           </Form.Field>
 

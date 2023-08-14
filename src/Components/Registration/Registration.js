@@ -17,6 +17,7 @@ const Registration = () => {
   const [gender, setGender] = useState("2");
   const [country, setCountry] = useState("20");
   const [isPending, setIsPending] = useState(false);
+  // const [error, setError] = useState(false);
 
   const navigate = useNavigate();
   const handleFirstInput = (e) => {
@@ -82,8 +83,21 @@ const Registration = () => {
     setCountry(selectedCountryId);
   };
 
-  const handleFormSubmit = () => {
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
     setIsPending(true);
+    // if (
+    //   firstInput.length === 0 ||
+    //   lastInput.length === 0 ||
+    //   dobInput.length === 0 ||
+    //   emailInput.length === 0 ||
+    //   telInput.length === 0 ||
+    //   pswInput.length === 0 ||
+    //   cpswInput.length === 0
+    // ) {
+    //   setError(true);
+    // }
+
     const registerApiUrl = "https://auth.privateyebd.com/api/v1/signup/";
     const formData = {
       first_name: firstInput,
@@ -111,7 +125,7 @@ const Registration = () => {
   return (
     <section className="registration-area">
       <div className="container pt-4">
-        <Form className="pb-4" onSubmit={() => handleFormSubmit()}>
+        <Form className="pb-4" onSubmit={(e) => handleFormSubmit(e)}>
           <Form.Field>
             <FormInput
               firstInputt={firstInput}
@@ -119,6 +133,9 @@ const Registration = () => {
               type="text"
               placeholder={"First Name"}
               label={"First Name"}
+              id="first-input"
+              errorMessage="First Name should be 8-10 characters including no special Character or numbers!"
+              pattern="^[A-Za-z]{3,16}"
             />
           </Form.Field>
           <Form.Field>
@@ -128,6 +145,9 @@ const Registration = () => {
               type="text"
               placeholder={"Last Name"}
               label={"Last Name"}
+              id="last-input"
+              errorMessage="Last Name should be 8-10 characters including no special Character or numbers!"
+              pattern="^[A-Za-z]{3,16}$"
             />
           </Form.Field>
           <Form.Field>
@@ -136,6 +156,8 @@ const Registration = () => {
               handleInput={handleDobInput}
               type="date"
               label={"Date of Birth"}
+              id="dob-input"
+              errorMessage="select correct format of date!"
             />
           </Form.Field>
           <Form.Field>
@@ -145,6 +167,8 @@ const Registration = () => {
               type="email"
               placeholder={"Email adress"}
               label={"Email Address"}
+              id="email-input"
+              errorMessage="Email should be like: abc@mail.com!"
             />
           </Form.Field>
           <Form.Field>
@@ -154,6 +178,9 @@ const Registration = () => {
               type="tel"
               placeholder={"Mobile Number"}
               label={"Mobile Number"}
+              id="tel-input"
+              errorMessage="It should be a valid Phone number!"
+              pattern="^[0-9]{5,20}"
             />
           </Form.Field>
           <Form.Field>
@@ -163,6 +190,9 @@ const Registration = () => {
               type="password"
               placeholder={"write password"}
               label={"Password"}
+              id="psw-input"
+              errorMessage="Password should be at least 8 character having one letter, one number and one special character!"
+              pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@#$%^&+=!])[A-Za-z\d@#$%^&+=!]{8,30}$"
             />
           </Form.Field>
           <Form.Field>
@@ -172,6 +202,9 @@ const Registration = () => {
               type="password"
               placeholder={"Write password again"}
               label={"Confirm password"}
+              id="cpsw-input"
+              errorMessage="Password doesn't match!"
+              pattern={pswInput}
             />
           </Form.Field>
           <Form.Field>

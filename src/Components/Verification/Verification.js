@@ -26,7 +26,7 @@ const Verification = () => {
         localStorage.removeItem("email");
       })
       .catch((error) => {
-        console.error("Error:", error.response.data);
+        alert("Verification Failed. Invalid Code.");
         setVerificationStatus("error");
       });
   };

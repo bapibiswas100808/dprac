@@ -1,7 +1,19 @@
-
+import { useState } from "react";
 import "./FormInput.css";
 
-const FormInput = ({ handleInput, placeholder, type, label }) => {
+const FormInput = ({
+  errorMessage,
+  id,
+  handleInput,
+  placeholder,
+  type,
+  label,
+  pattern,
+}) => {
+  const [focused, setFocused] = useState(false);
+  const handleFocus = (e) => {
+    setFocused(true);
+  };
   return (
     <section>
       <label className="pb-2">{label}</label>
@@ -9,10 +21,13 @@ const FormInput = ({ handleInput, placeholder, type, label }) => {
         onChange={(e) => handleInput(e)}
         placeholder={placeholder}
         type={type}
-        className=""
-        id="input"
+        id={id}
+        required
+        pattern={pattern}
+        onBlur={handleFocus}
+        focused={focused.toString()}
       />
-      <span  className=""></span>
+      <span>{errorMessage}</span>
     </section>
   );
 };

@@ -1,12 +1,10 @@
-input.success {
-  border: 2px solid rgb(41, 192, 41) !important;
-}
-span.success {
-  color: rgb(41, 192, 41);
-}
-input.danger {
-  border: 2px solid red !important;
-}
-span.danger {
+span {
   color: red;
+  display: none;
+}
+input:invalid[focused="true"] {
+  border: 1px solid red !important;
+}
+input:invalid[focused="true"] ~ span {
+  display: block;
 }

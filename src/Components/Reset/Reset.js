@@ -26,12 +26,13 @@ const Reset = () => {
         localStorage.removeItem("femail");
       })
       .catch((error) => {
-        console.error("Error:", error.response);
+        alert("Invalid Code");
       });
   };
   return (
     <section className="reset-area">
       <div className="container">
+        <p>Wehave sent a verification code in your Email!</p>
         <Form>
           <Form.Field>
             <label>Write Verification Code Here</label>
@@ -43,6 +44,8 @@ const Reset = () => {
               placeholder="Write Your new password Here"
               type="password"
               handleInput={(e) => setNewPswInput(e.target.value)}
+              pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@#$%^&+=!])[A-Za-z\d@#$%^&+=!]{8,30}$"
+              errorMessage="Password should be at least 8 character having one letter, one number and one special character!"
             />
           </Form.Field>
           <button onClick={() => handleReset()} type="submit" className="btn">
