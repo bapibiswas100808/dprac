@@ -4,6 +4,7 @@ import FormInput from "../FormElement/FormInput";
 import { useState } from "react";
 import axios from "axios";
 import "./Reset.css";
+import OTP from "../OTP/OTP";
 
 const Reset = () => {
   const [resetInput, setResetInput] = useState("");
@@ -33,12 +34,8 @@ const Reset = () => {
       <div className="container">
         <Form>
           <Form.Field>
-            <FormInput
-              value={resetInput}
-              placeholder="Write Your verification code Here"
-              type="text"
-              handleInput={(e) => setResetInput(e.target.value)}
-            />
+            <label>Write Verification Code Here</label>
+            <OTP onChange={(e) => setResetInput(e)} />
           </Form.Field>
           <Form.Field>
             <FormInput

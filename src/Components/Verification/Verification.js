@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import { Form } from "semantic-ui-react";
 import axios from "axios";
 import "./Verification.css";
+import OTP from "../OTP/OTP";
 
 const Verification = () => {
   const [verificationCode, setVerificationCode] = useState("");
+  const [verificationStatus, setVerificationStatus] = useState(null);
 
   const userEmail = localStorage.getItem("email");
 
@@ -20,11 +22,18 @@ const Verification = () => {
       .post(verificationApiUrl, verificationData)
       .then((response) => {
         alert("Verification Successful. Please Login.");
+        setVerificationStatus("success");
         localStorage.removeItem("email");
       })
       .catch((error) => {
         console.error("Error:", error.response.data);
+        setVerificationStatus("error");
       });
+  };
+
+  const handleOTPChange = (otpString) => {
+    setVerificationCode(otpString);
+    setVerificationStatus(null);
   };
 
   return (
@@ -33,16 +42,21 @@ const Verification = () => {
         <Form>
           <Form.Field>
             <label>Verification Code</label>
-            <input
-              type="text"
-              value={verificationCode}
-              onChange={(e) => setVerificationCode(e.target.value)}
-              placeholder="Enter verification code"
-            />
+            <OTP onChange={handleOTPChange} />
           </Form.Field>
           <button onClick={handleVerificationCode} className="btn">
             Submit
           </button>
+          {verificationStatus === "success" && (
+            <div className="success-message">
+              Verification successful. Please login.
+            </div>
+          )}
+          {verificationStatus === "error" && (
+            <div className="error-message">
+              Verification failed. Please try again.
+            </div>
+          )}
         </Form>
       </div>
     </section>

@@ -1,4 +1,5 @@
-import React from "react";
+
+import "./FormInput.css";
 
 const FormInput = ({ handleInput, placeholder, type, label }) => {
   return (
@@ -8,7 +9,10 @@ const FormInput = ({ handleInput, placeholder, type, label }) => {
         onChange={(e) => handleInput(e)}
         placeholder={placeholder}
         type={type}
+        className=""
+        id="input"
       />
+      <span  className=""></span>
     </section>
   );
 };

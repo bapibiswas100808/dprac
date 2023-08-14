@@ -16,6 +16,7 @@ const Registration = () => {
   const [cpswInput, setCpswInput] = useState("");
   const [gender, setGender] = useState("2");
   const [country, setCountry] = useState("20");
+  const [isPending, setIsPending] = useState(false);
 
   const navigate = useNavigate();
   const handleFirstInput = (e) => {
@@ -82,6 +83,7 @@ const Registration = () => {
   };
 
   const handleFormSubmit = () => {
+    setIsPending(true);
     const registerApiUrl = "https://auth.privateyebd.com/api/v1/signup/";
     const formData = {
       first_name: firstInput,
@@ -99,6 +101,7 @@ const Registration = () => {
       .post(registerApiUrl, formData)
       .then((response) => {
         localStorage.setItem("email", response.data.email);
+        setIsPending(false);
         navigate(`/verification`);
       })
       .catch((error) => {
@@ -189,9 +192,16 @@ const Registration = () => {
           </Form.Field>
           <p>Click "Register Here" to Submit</p>
           <div>
-            <button type="submit" className="btn">
-              Register Here
-            </button>
+            {!isPending && (
+              <button type="submit" className="btn">
+                Register Here
+              </button>
+            )}
+            {isPending && (
+              <button disabled type="submit" className="btn">
+                Registering ...
+              </button>
+            )}
           </div>
         </Form>
       </div>

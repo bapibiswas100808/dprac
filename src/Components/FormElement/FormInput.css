@@ -1,0 +1,12 @@
+input.success {
+  border: 2px solid rgb(41, 192, 41) !important;
+}
+span.success {
+  color: rgb(41, 192, 41);
+}
+input.danger {
+  border: 2px solid red !important;
+}
+span.danger {
+  color: red;
+}
