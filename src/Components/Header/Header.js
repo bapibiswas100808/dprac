@@ -20,20 +20,21 @@ const Header = () => {
     <section className="header-area">
       <Navbar expand="lg">
         <Container>
-          <Navbar.Brand>
-            <NavLink to="/">
-              <h1>Dark Mode</h1>
-            </NavLink>
-          </Navbar.Brand>
+          <NavLink className="pe-3">
+            <h1>Dark Mode</h1>
+          </NavLink>
           <Navbar.Toggle aria-controls="navbarScroll" />
           <Navbar.Collapse id="navbarScroll">
             <Nav
-              className="me-auto my-2 my-lg-0"
+              className="me-auto my-2 my-lg-0 d-flex align-items-center"
               style={{ maxHeight: "100px" }}
               navbarScroll
             >
               <NavLink className="nav-link" to="/home">
                 Home
+              </NavLink>
+              <NavLink className="nav-link" to="/profile">
+                Profile
               </NavLink>
               <NavLink className="nav-link" to="/registration">
                 Registration

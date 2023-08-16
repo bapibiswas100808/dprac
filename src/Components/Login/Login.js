@@ -30,7 +30,7 @@ const Login = () => {
         navigate("/home");
       })
       .catch((error) => {
-        alert("Email Adress does not exists");
+        alert("Something wrong with your Email or Password!");
       });
   };
   return (
@@ -44,6 +44,7 @@ const Login = () => {
               type="email"
               placeholder={"Email adress"}
               label={"Email Address"}
+              errorMessage="Email does not exists"
             />
           </Form.Field>
           <Form.Field>

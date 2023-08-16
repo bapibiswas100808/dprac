@@ -12,6 +12,7 @@ import Forget from "./Components/Forget/Forget";
 import Reset from "./Components/Reset/Reset";
 import PrivateRoute from "./Components/Auth/PrivateRoute";
 import { ThemeContext } from "./Components/ThemeContext/ThemeContext";
+import Profile from "./Components/Profile/Profile";
 
 function App() {
   const [theme, setTheme] = useState("light");
@@ -29,6 +30,7 @@ function App() {
           <Route path="/verification" element={<Verification />} />
           <Route path="/forget" element={<Forget />} />
           <Route path="/reset" element={<Reset />} />
+          <Route path="/profile" element={<Profile />} />
         </Routes>
         <Footer />
       </div>
