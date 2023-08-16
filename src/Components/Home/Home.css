@@ -6,3 +6,9 @@
 .home-area button:hover {
   color: #ffffff;
 }
+
+@media (max-width: 991px) {
+  .user-profile {
+    text-align: center;
+  }
+}

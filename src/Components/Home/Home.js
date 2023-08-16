@@ -65,27 +65,27 @@ const Home = () => {
                 Log Out
               </button>
             </div>
+            <div className="user-profile pt-4">
+              {profile.data ? (
+                <div className="user-profile">
+                  <h2>User Profile</h2>
+                  <Profile />
+                  <p>
+                    Name: {profile.data.first_name} {profile.data.last_name}
+                  </p>
+                  <p>Email: {profile.data.email}</p>
+                  <p>Mobile: {profile.data.mobile}</p>
+                  <p>Bio: {profile.data.bio}</p>
+                </div>
+              ) : (
+                <p>Loading user profile...</p>
+              )}
+            </div>
           </Col>
           <Col lg={9} className="text-area pt-4">
             <Homepage fontSize={fontSize} fontType={fontType} />
           </Col>
         </Row>
-        <div className="user-profile pt-4">
-          {profile.data ? (
-            <div>
-              <h2>User Profile</h2>
-              <Profile />
-              <p>
-                Name: {profile.data.first_name} {profile.data.last_name}
-              </p>
-              <p>Email: {profile.data.email}</p>
-              <p>Mobile: {profile.data.mobile}</p>
-              <p>Bio: {profile.data.bio}</p>
-            </div>
-          ) : (
-            <p>Loading user profile...</p>
-          )}
-        </div>
       </div>
     </section>
   );

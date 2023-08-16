@@ -36,13 +36,13 @@ const Profile = () => {
         <h3>Upload Your Photo</h3>
         <div className="upload-image">
           <input
-            className="mb-3"
+            className="mb-3 bg-transparent"
             type="file"
             name="file"
             onChange={handleChange}
           />
           <button
-            className="p-2 custom-hover ms-3 rounded"
+            className="px-3 py-2 custom-hover mb-3 rounded"
             onClick={handleImage}
           >
             Upload Image

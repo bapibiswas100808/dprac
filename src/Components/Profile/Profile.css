@@ -7,3 +7,7 @@
 .custom-hover:hover {
   background-color: red;
 }
+.upload-image input {
+  color: #5f99be;
+  width: 200px;
+}
