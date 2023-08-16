@@ -41,7 +41,7 @@ const Verification = () => {
       <div className="container pt-4">
         <Form>
           <Form.Field>
-            <label>Verification Code</label>
+            <label>Verification Code is sent to your Email!</label>
             <OTP onChange={handleOTPChange} />
           </Form.Field>
           <button onClick={handleVerificationCode} className="btn">

@@ -11,6 +11,7 @@ const Profile = () => {
   };
   const handleImage = () => {
     const imageApi = "https://auth.privateyebd.com/api/v1/documents/upload/";
+
     const formData = new FormData();
     formData.append("document", image);
     formData.append("doc_type", 0);
@@ -25,13 +26,14 @@ const Profile = () => {
         alert("success");
       })
       .catch((error) => {
-        console.log(error.response.data);
+        console.log(error.response);
+        alert("failed");
       });
   };
   return (
     <section className="profile-area">
-      <div className="container">
-        <h2 className="text-center">Upload Your Photo</h2>
+      <div>
+        <h3>Upload Your Photo</h3>
         <div className="upload-image">
           <input
             className="mb-3"
@@ -39,7 +41,10 @@ const Profile = () => {
             name="file"
             onChange={handleChange}
           />
-          <button className="btn" onClick={handleImage}>
+          <button
+            className="p-2 custom-hover ms-3 rounded"
+            onClick={handleImage}
+          >
             Upload Image
           </button>
         </div>
