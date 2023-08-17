@@ -4,6 +4,7 @@ import "./Profile.css";
 
 const Profile = () => {
   const [image, setImage] = useState("");
+  const [uploading, setUploading] = useState(false);
   const handleChange = (e) => {
     const upImage = e.target.files[0];
     console.log(upImage);
@@ -15,19 +16,24 @@ const Profile = () => {
     const formData = new FormData();
     formData.append("document", image);
     formData.append("doc_type", 0);
+    const accessToken = `Token ${localStorage.getItem("getToken")}`;
+    setUploading(true);
     axios
       .post(imageApi, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
+          Authorization: accessToken,
         },
       })
       .then((res) => {
-        console.log(res);
+        console.log(res.data);
         alert("success");
+        setUploading(false);
       })
       .catch((error) => {
         console.log(error.response);
         alert("failed");
+        setUploading(false);
       });
   };
   return (
@@ -44,8 +50,9 @@ const Profile = () => {
           <button
             className="px-3 py-2 custom-hover mb-3 rounded"
             onClick={handleImage}
+            disabled={uploading}
           >
-            Upload Image
+            {uploading ? "Uploading..." : "Upload Image"}
           </button>
         </div>
       </div>
