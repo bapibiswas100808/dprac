@@ -22,7 +22,6 @@ const Home = () => {
       })
       .then(
         (res) => {
-          console.log(res);
           setProfile(res);
         },
         (error) => {

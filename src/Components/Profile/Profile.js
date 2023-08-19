@@ -27,6 +27,7 @@ const Profile = () => {
       })
       .then((res) => {
         console.log(res.data);
+        localStorage.setItem("imageId", res.data.id);
         alert("success");
         setUploading(false);
       })
