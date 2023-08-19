@@ -1,5 +1,6 @@
 .footer-text {
   padding: 10px 0;
+  padding-top: 100px;
 }
 
 @media (max-width: 991px) {

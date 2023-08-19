@@ -23,7 +23,7 @@ const Homepage = ({ fontSize, fontType }) => {
           console.log(error.response.data);
         }
       );
-  }, []);
+  }, [profile]);
   if (!profile) {
     return null;
   }
@@ -41,7 +41,6 @@ const Homepage = ({ fontSize, fontType }) => {
       image,
       bio,
     };
-    console.log(bioForm);
     axios
       .post(bioApi, bioForm, {
         headers: {
@@ -98,7 +97,12 @@ const Homepage = ({ fontSize, fontType }) => {
                   placeholder="Write something about yourself . . ."
                   name="bioInput"
                 />
-                <h3>Image:{imageID}</h3>
+                <h3>
+                  Image:
+                  {imageID
+                    ? "Upload Successful!"
+                    : "Please Upload Your Picture!"}
+                </h3>
                 <button className="btn" type="submit">
                   Submit
                 </button>
@@ -108,14 +112,14 @@ const Homepage = ({ fontSize, fontType }) => {
           <Col lg={6}>
             <div>
               <div className="user-profile mt-2">
-                <h2>User Profile</h2>
+                <h2>User Image</h2>
                 <img className="w-100" src={profile.data.image_url} alt="" />
-                <p>
+                {/* <p>
                   Name: {profile.data.first_name} {profile.data.last_name}
                 </p>
                 <p>Email: {profile.data.email}</p>
                 <p>Mobile: {profile.data.mobile}</p>
-                <p>Bio: {profile.data.bio}</p>
+                <p>Bio: {profile.data.bio}</p> */}
               </div>
             </div>
           </Col>

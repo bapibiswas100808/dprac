@@ -28,7 +28,7 @@ const Home = () => {
           console.log(error.response.data);
         }
       );
-  }, []);
+  }, [profile]);
 
   const handleSize = (e) => {
     const getValue = e.target.value;
