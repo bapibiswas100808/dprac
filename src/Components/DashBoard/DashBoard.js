@@ -17,7 +17,7 @@ const DashBoard = () => {
     const conf = window.confirm("Do You Want to Delete?");
     if (conf) {
       await axios
-        .delete("https://auth.privateyebd.com/api/v2/qrcodes/" + id)
+        .delete(`https://auth.privateyebd.com/api/v2/qrcodes/${id}/`)
         .then((res) => {
           alert("Record has been deleted!");
           navigate("/dash");
@@ -31,16 +31,37 @@ const DashBoard = () => {
     const accessToken = `Token ${localStorage.getItem("getToken")}`;
     console.log(accessToken);
     try {
-      const response = await axios.patch(
-        `https://auth.privateyebd.com/api/v2/qrcodes/${id}/`,
+      await axios
+        .patch(
+          `https://auth.privateyebd.com/api/v2/qrcodes/${id}/`,
 
-        {
-          headers: {
-            Authorization: accessToken,
-          },
-        }
-      );
-      console.log(response);
+          {
+            headers: {
+              Authorization: accessToken,
+            },
+          }
+        )
+        .then((response) => {
+          console.log(response.data);
+          const screenWidth =
+            window.innerWidth ||
+            document.documentElement.clientWidth ||
+            document.body.clientWidth;
+          const popupWidth = screenWidth >= 768 ? 600 : 300;
+          const popupHeight = 600;
+          const popupWindow = window.open(
+            "",
+            "_blank",
+            `width=${popupWidth},height=${popupHeight}`
+          );
+          popupWindow.document.write(`
+            <h2>QR Code Details</h2>
+            <p><strong>Title:</strong> ${response.data.title}</p>
+            <p><strong>QR Text:</strong> ${response.data.qr_text}</p>
+            <p><strong>QR Code Image:</strong></p>
+            <img className="qr-image-view w-100" src="${response.data.qr_code}" alt="QR Code">
+          `);
+        });
     } catch (error) {
       console.log(error);
     }
@@ -80,21 +101,24 @@ const DashBoard = () => {
                 <td className="text-end">
                   <button
                     onClick={() => handleView(d.id)}
-                    className=" btn-success px-2 rounded"
+                    className=" btn-success px-2 rounded view-button"
                     style={{ border: "1px solid #828080", fontSize: "15px" }}
                   >
                     View
                   </button>
                   <Link
                     to={`/update/${d.id}`}
-                    className=" btn-success ms-2 px-2 rounded"
-                    style={{ border: "1px solid #828080", fontSize: "15px" }}
+                    className=" btn-success ms-2 px-2 rounded update-button bg-transparent"
+                    style={{
+                      border: "1px solid #828080",
+                      fontSize: "15px",
+                    }}
                   >
                     Update
                   </Link>
                   <button
                     onClick={(e) => handleDelete(d.id)}
-                    className="bg-danger rounded ms-2 px-2"
+                    className="bg-danger rounded ms-2 px-2 delete-button"
                     style={{ border: "none", padding: "4px", color: "white" }}
                   >
                     Delete

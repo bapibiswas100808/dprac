@@ -12,3 +12,17 @@
 .dash-button:hover {
   background-color: red;
 }
+
+@media (max-width: 991px) {
+  .delete-button {
+    margin-top: 5px;
+  }
+}
+@media (max-width: 768px) {
+  .update-button {
+    margin-top: 5px;
+  }
+  .view-button {
+    margin-bottom: 8px;
+  }
+}
