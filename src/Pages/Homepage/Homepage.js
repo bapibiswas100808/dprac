@@ -20,7 +20,7 @@ const Homepage = ({ fontSize, fontType }) => {
           setProfile(res);
         },
         (error) => {
-          console.log(error.response.data);
+          console.log(error);
         }
       );
   }, [profile]);

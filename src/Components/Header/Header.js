@@ -39,6 +39,9 @@ const Header = () => {
               <NavLink className="nav-link" to="/login">
                 Login
               </NavLink>
+              <NavLink className="nav-link" to="/dash">
+                DashBoard
+              </NavLink>
             </Nav>
             {/* <Form className="d-flex">
               <Button onClick={() => ToogleTheme()}>Toggle</Button>

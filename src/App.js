@@ -12,6 +12,9 @@ import Forget from "./Components/Forget/Forget";
 import Reset from "./Components/Reset/Reset";
 import PrivateRoute from "./Components/Auth/PrivateRoute";
 import { ThemeContext } from "./Components/ThemeContext/ThemeContext";
+import DashBoard from "./Components/DashBoard/DashBoard";
+import CreateMember from "./Components/CreateMember/CreateMember";
+import Update from "./Components/Update/Update";
 
 function App() {
   const [theme, setTheme] = useState("light");
@@ -29,6 +32,9 @@ function App() {
           <Route path="/verification" element={<Verification />} />
           <Route path="/forget" element={<Forget />} />
           <Route path="/reset" element={<Reset />} />
+          <Route path="/add" element={<CreateMember />} />
+          <Route path="/dash" element={<DashBoard />} />
+          <Route path="/update/:id" element={<Update />} />
         </Routes>
         <Footer />
       </div>

@@ -21,6 +21,8 @@
   --input-bg-color: #035d91;
   --switch-bg-color: #111b20;
   --textarea-bg-color: #5f99be;
+  --bs-body-bg: #035d91;
+  --table-content-color: #ffffff;
 }
 
 /* .dark {
@@ -88,4 +90,7 @@ input {
 }
 textarea {
   background-color: var(--textarea-bg-color) !important;
+}
+table {
+  background-color: var(--bs-body-bg) !important;
 }

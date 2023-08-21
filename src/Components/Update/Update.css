@@ -1,0 +1,6 @@
+.update-area {
+  min-height: calc(100vh - 248px);
+}
+input {
+  border: 1px solid #828080;
+}

@@ -1,0 +1,14 @@
+.dash-area {
+  height: auto;
+}
+
+.dash-button {
+  display: block;
+  margin-left: auto;
+  background-color: #5f99be;
+  color: aliceblue;
+  border: none;
+}
+.dash-button:hover {
+  background-color: red;
+}

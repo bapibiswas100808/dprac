@@ -119,7 +119,7 @@ const Registration = () => {
         navigate(`/verification`);
       })
       .catch((error) => {
-        console.error("Error:", error.response.data);
+        console.error("Error:", error.response);
       });
   };
   return (
