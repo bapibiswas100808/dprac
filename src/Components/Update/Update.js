@@ -5,41 +5,49 @@ import "./Update.css";
 
 const Update = () => {
   const { id } = useParams();
+  console.log("ID from URL:", id);
   const [data, setData] = useState({
     title: "",
     qr_text: "",
   });
   console.log(data);
+
   const navigate = useNavigate();
+
   useEffect(() => {
     axios
-      .get("https://auth.privateyebd.com/api/v2/qrcodes/" + id)
+      .get(`https://auth.privateyebd.com/api/v2/qrcodes/${id}/`)
       .then((res) => {
-        console.log(res.data);
         setData(res.data);
       })
       .catch((error) => {
         console.log(error);
       });
   }, [id]);
-  const handleUpdate = (event) => {
-    event.preventDefault();
+
+  const handleUpdate = async (e) => {
+    e.preventDefault();
     const accessToken = `Token ${localStorage.getItem("getToken")}`;
-    axios
-      .put("https://auth.privateyebd.com/api/v2/qrcodes/" + id, data, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-          Authorization: accessToken,
-        },
-      })
-      .then((res) => {
-        console.log(res);
-        navigate("/dash");
-      })
-      .catch((error) => {
-        console.log(error.response.data);
-      });
+
+    try {
+      const response = await axios.put(
+        `https://auth.privateyebd.com/api/v2/qrcodes/${id}/`,
+        data,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            Authorization: accessToken,
+          },
+        }
+      );
+
+      console.log(response);
+      navigate("/dash");
+    } catch (error) {
+      console.log(error.response.data);
+    }
   };
+
   return (
     <section className="update-area">
       <div className="container">
@@ -50,9 +58,9 @@ const Update = () => {
             type="text"
             placeholder="Update Title here"
             value={data.title}
-            name="titleInput"
+            name="title"
             onChange={(e) =>
-              setData((prevData) => ({ ...prevData, title: e.target.value }))
+              setData({ ...data, [e.target.name]: e.target.value })
             }
           />
           <input
@@ -60,9 +68,9 @@ const Update = () => {
             type="text"
             placeholder="Update qr text here"
             value={data.qr_text}
-            name="qrInput"
+            name="qr_text"
             onChange={(e) =>
-              setData((prevData) => ({ ...prevData, qr_text: e.target.value }))
+              setData({ ...data, [e.target.name]: e.target.value })
             }
           />
           <button className="btn" type="submit">

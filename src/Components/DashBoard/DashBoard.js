@@ -9,15 +9,14 @@ const DashBoard = () => {
   const navigate = useNavigate();
   useEffect(() => {
     axios.get("https://auth.privateyebd.com/api/v2/qrcodes/").then((res) => {
-      console.log(res.data);
       setColumns(Object.keys(res.data[0]));
       setRecords(res.data);
     });
   }, [columns]);
-  const handleDelete = (id) => {
+  const handleDelete = async (id) => {
     const conf = window.confirm("Do You Want to Delete?");
     if (conf) {
-      axios
+      await axios
         .delete("https://auth.privateyebd.com/api/v2/qrcodes/" + id)
         .then((res) => {
           alert("Record has been deleted!");
@@ -26,6 +25,24 @@ const DashBoard = () => {
         .catch((error) => {
           console.groupCollapsed(error);
         });
+    }
+  };
+  const handleView = async (id) => {
+    const accessToken = `Token ${localStorage.getItem("getToken")}`;
+    console.log(accessToken);
+    try {
+      const response = await axios.patch(
+        `https://auth.privateyebd.com/api/v2/qrcodes/${id}/`,
+
+        {
+          headers: {
+            Authorization: accessToken,
+          },
+        }
+      );
+      console.log(response);
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -61,13 +78,13 @@ const DashBoard = () => {
                   />
                 </td>
                 <td className="text-end">
-                  <Link
-                    to={`/update/${d.id}`}
+                  <button
+                    onClick={() => handleView(d.id)}
                     className=" btn-success px-2 rounded"
                     style={{ border: "1px solid #828080", fontSize: "15px" }}
                   >
                     View
-                  </Link>
+                  </button>
                   <Link
                     to={`/update/${d.id}`}
                     className=" btn-success ms-2 px-2 rounded"
