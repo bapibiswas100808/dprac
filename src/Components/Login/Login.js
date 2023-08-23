@@ -30,7 +30,10 @@ const Login = () => {
         navigate("/home");
       })
       .catch((error) => {
-        alert("Something wrong with your Email or Password!");
+        console.log(error.response.data);
+        const loginError = error.response.data.email;
+        const loginPasswordError = error.response.data.detail;
+        alert(loginError ? loginError : loginPasswordError);
       });
   };
   return (
